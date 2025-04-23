@@ -5,7 +5,7 @@ import Modal from "react-native-modal";
 import MovieList from "../components/MovieList";
 import MoviePoster from "../components/MoviePoster";
 
-export default function Movies() {
+export default function Movies({ navigation }) {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -14,10 +14,14 @@ export default function Movies() {
     setModalVisible(true);
   }
 
+  function handleDetail(movie) {
+    navigation.navigate("MovieDail", { filme: movie });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Meus Filmes</Text>
-      <MovieList filmes={movies} handleModal={handleModal} />
+      <MovieList filmes={movies} handleModal={handleDetail} />
 
       {selectedMovie ? (
         <Modal isVisible={isModalVisible}>
